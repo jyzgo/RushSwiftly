@@ -58,6 +58,7 @@ public class TouchControl : MonoBehaviour {
     private void OnSwipeLeft()
     {
         Debug.Log("Swipe left");
+
     }
 
     private void OnSwipeRight()
@@ -78,6 +79,7 @@ public class TouchControl : MonoBehaviour {
     void OnClick()
     {
         Debug.Log("Click");
+        LevelMgr.Current.OnClick();
     }
 
     Vector3 fingerDown;
