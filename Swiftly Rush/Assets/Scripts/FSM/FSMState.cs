@@ -52,6 +52,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 public enum Transition
 {
     NullTransition = 0, // Use this transition to represent a non-existing transition in your system
+    ReadyToPlaying,
+    PlayingToLost,
+    LostToReady
 }
 
 /// <summary>
@@ -61,6 +64,9 @@ public enum Transition
 public enum StateID
 {
     NullStateID = 0, // Use this ID to represent a non-existing State in your system	
+    Ready,
+    Playing,
+    Lost
 }
 
 /// <summary>

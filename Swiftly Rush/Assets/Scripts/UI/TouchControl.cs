@@ -57,13 +57,16 @@ public class TouchControl : MonoBehaviour {
 
     private void OnSwipeLeft()
     {
+        
         Debug.Log("Swipe left");
+        LevelMgr.Current.SwipeLeft();
 
     }
 
     private void OnSwipeRight()
     {
         Debug.Log("Swipe right");
+        LevelMgr.Current.SwipeRight();
     }
 
     private void OnSwipeDown()

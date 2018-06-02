@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System;
 using MonsterLove.StateMachine;
+using MTUnity.Actions;
 
 enum PlayState
 {
@@ -72,14 +73,23 @@ public class LevelMgr :MonoBehaviour
         Debug.Log("Touch");
     }
 
-    public void SlideLeft()
+    
+    public void SwipeLeft()
     {
-        Debug.Log("Left");
+        if (_fsm.State == PlayState.Playing)
+        {
+            Debug.Log("Left");
+            _fsm.ChangeState(PlayState.Turning);
+        }
     }
 
-    public void SlideRight()
+    public void SwipeRight()
     {
-        Debug.Log("Right");
+        if (_fsm.State == PlayState.Playing)
+        {
+            Debug.Log("Right");
+            _fsm.ChangeState(PlayState.Turning);
+        }
     }
 
     public void OnClick()
@@ -87,10 +97,27 @@ public class LevelMgr :MonoBehaviour
         if(_fsm.State == PlayState.Ready)
         {
             _fsm.ChangeState(PlayState.Playing);
-        }else
+        }else if(_fsm.State == PlayState.Playing)
         {
             Debug.Log("Jump");
+            _fsm.ChangeState(PlayState.Jumping);
         }
+    }
+
+    public void Jumping_Enter()
+    {
+
+        _player.RunActions(new MTRotateBy(0.1f, 0, 90, 0f), new MTCallFunc(ChangeToPlaying));
+    }
+
+    public void Turning_Enter()
+    {
+        _player.RunActions(new MTRotateBy(0.1f, 0, -90f, 0), new MTCallFunc(ChangeToPlaying));
+    }
+
+    void ChangeToPlaying()
+    {
+        _fsm.ChangeState(PlayState.Playing);
     }
 }
 
