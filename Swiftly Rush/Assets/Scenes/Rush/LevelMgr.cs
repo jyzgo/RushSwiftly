@@ -12,7 +12,8 @@ enum PlayState
     Ready,
     Playing,
     Jumping,
-    Turning,
+    ToRight,
+    ToLeft,
     Dying
 };
 public class LevelMgr :MonoBehaviour
@@ -78,8 +79,7 @@ public class LevelMgr :MonoBehaviour
     {
         if (_fsm.State == PlayState.Playing)
         {
-            Debug.Log("Left");
-            _fsm.ChangeState(PlayState.Turning);
+            _fsm.ChangeState(PlayState.ToLeft);
         }
     }
 
@@ -87,8 +87,7 @@ public class LevelMgr :MonoBehaviour
     {
         if (_fsm.State == PlayState.Playing)
         {
-            Debug.Log("Right");
-            _fsm.ChangeState(PlayState.Turning);
+            _fsm.ChangeState(PlayState.ToRight);
         }
     }
 
@@ -109,9 +108,16 @@ public class LevelMgr :MonoBehaviour
 
         _player.RunActions(new MTRotateBy(0.1f, 0, 90, 0f), new MTCallFunc(ChangeToPlaying));
     }
-
-    public void Turning_Enter()
+    public void ToLeft_Enter()
     {
+        Debug.Log("Left");
+        _player.RunActions(new MTRotateBy(0.1f, 0, -90f, 0), new MTCallFunc(ChangeToPlaying));
+    }
+
+
+    public void ToRight_Enter()
+    {
+        Debug.Log("Right");
         _player.RunActions(new MTRotateBy(0.1f, 0, -90f, 0), new MTCallFunc(ChangeToPlaying));
     }
 
