@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 4710248}
   - component: {fileID: 4710247}
   - component: {fileID: 4710246}
+  - component: {fileID: 4710250}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -202,6 +203,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &4710250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 4710245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51137f02e214f941aaab59787d65a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateText: {fileID: 2007564874}
 --- !u!1 &470751942
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +777,7 @@ GameObject:
   - component: {fileID: 2007564875}
   - component: {fileID: 2007564874}
   m_Layer: 5
-  m_Name: Text
+  m_Name: StateText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -785,7 +798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 170.48}
   m_SizeDelta: {x: 619.05, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2007564874
@@ -820,7 +833,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Get Ready!
 --- !u!222 &2007564875
 CanvasRenderer:
   m_ObjectHideFlags: 0

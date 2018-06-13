@@ -23,11 +23,12 @@ public class LevelMgr :MonoBehaviour
     Player _player; 
 
     StateMachine<PlayState> _fsm;
-    
+    UIMgr uiMgr;
     public void Init()
     {
-        
+        uiMgr = FindObjectOfType<UIMgr>();
         _fsm = StateMachine<PlayState>.Initialize(this, PlayState.Ready);
+
     }
 
     void Awake()
@@ -53,12 +54,14 @@ public class LevelMgr :MonoBehaviour
     void Ready_Enter()
     {
         Debug.Log("Ready");
+        uiMgr.SetStateText("Get Ready!");
         //_fsm.ChangeState(PlayState.Playing);
     }
 
     void Playing_Enter()
     {
         Debug.Log("Playing");
+        uiMgr.SetStateText("Playing");
     }
 
     const float SPEED = 0.05f;
