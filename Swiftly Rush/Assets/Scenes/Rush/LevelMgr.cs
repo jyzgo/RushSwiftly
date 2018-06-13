@@ -11,9 +11,6 @@ enum PlayState
 {
     Ready,
     Playing,
-    Jumping,
-    ToRight,
-    ToLeft,
     Dying
 };
 public class LevelMgr :MonoBehaviour
@@ -80,7 +77,7 @@ public class LevelMgr :MonoBehaviour
     {
         if (_fsm.State == PlayState.Playing)
         {
-            _fsm.ChangeState(PlayState.ToLeft);
+            _player.RunActions(new MTMoveBy(MOVE_TIME, -1 * _player.transform.right), new MTCallFunc(ChangeToPlaying));
         }
     }
 
@@ -88,7 +85,7 @@ public class LevelMgr :MonoBehaviour
     {
         if (_fsm.State == PlayState.Playing)
         {
-            _fsm.ChangeState(PlayState.ToRight);
+            _player.RunActions(new MTMoveBy(MOVE_TIME, _player.transform.right), new MTCallFunc(ChangeToPlaying));
         }
     }
 
@@ -97,10 +94,6 @@ public class LevelMgr :MonoBehaviour
         if(_fsm.State == PlayState.Ready)
         {
             _fsm.ChangeState(PlayState.Playing);
-        }else if(_fsm.State == PlayState.Playing)
-        {
-            Debug.Log("Jump");
-            _fsm.ChangeState(PlayState.Jumping);
         }
     }
 
@@ -109,18 +102,7 @@ public class LevelMgr :MonoBehaviour
 
         _player.RunActions(new MTRotateBy(0.1f, 0, 90, 0f), new MTCallFunc(ChangeToPlaying));
     }
-    public void ToLeft_Enter()
-    {
-        Debug.Log("Left");
-        _player.RunActions(new MTMoveBy(MOVE_TIME, -1 * _player.transform.right), new MTCallFunc(ChangeToPlaying));
-    }
-
-
-    public void ToRight_Enter()
-    {
-        Debug.Log("Right");
-        _player.RunActions(new MTMoveBy(MOVE_TIME, _player.transform.right), new MTCallFunc(ChangeToPlaying));
-    }
+   
 
     void ChangeToPlaying()
     {
