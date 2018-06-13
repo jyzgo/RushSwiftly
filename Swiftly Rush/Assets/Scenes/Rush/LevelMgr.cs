@@ -18,7 +18,8 @@ enum PlayState
 };
 public class LevelMgr :MonoBehaviour
 {
-    
+    const float MOVE_TIME = 0.2f;
+    const float JUMP_TIME = 0.2f;
 
     public static LevelMgr Current;
 
@@ -111,14 +112,14 @@ public class LevelMgr :MonoBehaviour
     public void ToLeft_Enter()
     {
         Debug.Log("Left");
-        _player.RunActions(new MTRotateBy(0.1f, 0, -90f, 0), new MTCallFunc(ChangeToPlaying));
+        _player.RunActions(new MTMoveBy(MOVE_TIME, -1 * _player.transform.right), new MTCallFunc(ChangeToPlaying));
     }
 
 
     public void ToRight_Enter()
     {
         Debug.Log("Right");
-        _player.RunActions(new MTRotateBy(0.1f, 0, -90f, 0), new MTCallFunc(ChangeToPlaying));
+        _player.RunActions(new MTMoveBy(MOVE_TIME, _player.transform.right), new MTCallFunc(ChangeToPlaying));
     }
 
     void ChangeToPlaying()
