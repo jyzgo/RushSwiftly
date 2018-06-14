@@ -18,6 +18,8 @@ public class LevelMgr :MonoBehaviour
     const float MOVE_TIME = 0.2f;
     const float JUMP_TIME = 0.2f;
 
+    int _way = 0;
+
     public static LevelMgr Current;
 
     Player _player; 
@@ -78,17 +80,20 @@ public class LevelMgr :MonoBehaviour
     
     public void SwipeLeft()
     {
-        if (_fsm.State == PlayState.Playing)
+        if (_fsm.State == PlayState.Playing && _way >-2)
         {
-            _player.RunActions(new MTMoveBy(MOVE_TIME, -1 * _player.transform.right), new MTCallFunc(ChangeToPlaying));
+            _way--;
+            _player.RunActions(new MTMoveBy(MOVE_TIME, -1 * _player.transform.right));
+            
         }
     }
 
     public void SwipeRight()
     {
-        if (_fsm.State == PlayState.Playing)
+        if (_fsm.State == PlayState.Playing && _way <2)
         {
-            _player.RunActions(new MTMoveBy(MOVE_TIME, _player.transform.right), new MTCallFunc(ChangeToPlaying));
+            _way++;
+            _player.RunActions(new MTMoveBy(MOVE_TIME, _player.transform.right));
         }
     }
 
