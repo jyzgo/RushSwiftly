@@ -83,7 +83,7 @@ public class LevelMgr :MonoBehaviour
         if (_fsm.State == PlayState.Playing && _way >-2)
         {
             _way--;
-            _player.RunActions(new MTMoveBy(MOVE_TIME, -1 * _player.transform.right));
+            _player.RunActions(new MTMoveBy(MOVE_TIME, -0.5f * _player.transform.right));
             
         }
     }
@@ -93,7 +93,7 @@ public class LevelMgr :MonoBehaviour
         if (_fsm.State == PlayState.Playing && _way <2)
         {
             _way++;
-            _player.RunActions(new MTMoveBy(MOVE_TIME, _player.transform.right));
+            _player.RunActions(new MTMoveBy(MOVE_TIME, 0.5f * _player.transform.right));
         }
     }
 
