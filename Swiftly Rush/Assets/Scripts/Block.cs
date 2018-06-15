@@ -13,13 +13,13 @@ public class Block : MonoBehaviour {
     // Use this for initialization
     void Start () {
         
-		for(int i = 0; i <10;i++)
+		for(int i = 0; i <20;i++)
         {
             for (int j =0; j<5;j++)
             {
                 var gb = Instantiate<GameObject>(_resMgr.Cube);
                 gb.transform.parent = transform;
-                gb.transform.position = new Vector3(j * SIZE,-SIZE,i * SIZE);
+                gb.transform.position = new Vector3(j * SIZE -1,-SIZE,i * SIZE);
             }
         }
 	}
