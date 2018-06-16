@@ -26,7 +26,16 @@ public class Block : MonoBehaviour {
             {
                 gb = Instantiate<GameObject>(_resMgr.Cube);
                 gb.transform.parent = transform;
-                gb.transform.localPosition= new Vector3(j * SIZE -1,-SIZE,i * SIZE);
+                if ( (i  + j) % 23 == 0)
+                {
+                    
+                    gb.transform.localPosition = new Vector3(j * SIZE - 1, 0, i * SIZE);
+                }
+                else
+                {
+                    gb.transform.localPosition = new Vector3(j * SIZE - 1, -SIZE, i * SIZE);
+                }
+
             }
         }
 
