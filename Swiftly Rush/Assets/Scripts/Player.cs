@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,13 +8,24 @@ public class Player : MonoBehaviour {
 
 
     // Use this for initialization
- 
+    Rigidbody _playerRigidbody;
+    private void Start()
+    {
+        _playerRigidbody = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
 
-            Debug.DrawRay(transform.position,Vector3.forward,Color.yellow,5f);
+            Debug.DrawRay(transform.position,Vector3.forward,Color.yellow);
     }
+
+    public void SetMoveDirection(Vector3 vec)
+    {
+
+    }
+
+    Vector3 _direction = Vector3.forward;
 
     // Update is called once per frame
     private void OnCollisionEnter(Collision collision)
@@ -69,5 +81,10 @@ public class Player : MonoBehaviour {
         //{
         //    //hit left
         //}
+    }
+
+    internal void Jump()
+    {
+        _playerRigidbody.AddForce(Vector3.up * 500f);
     }
 }

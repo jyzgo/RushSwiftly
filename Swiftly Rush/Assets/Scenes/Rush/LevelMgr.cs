@@ -29,8 +29,9 @@ public class LevelMgr :MonoBehaviour
     UIMgr uiMgr;
     public void Init()
     {
+        Physics.gravity = new Vector3(0, -30.0F, 0);
         uiMgr = FindObjectOfType<UIMgr>();
-        _player = FindObjectOfType<Player>();
+        RegisterPlayer( FindObjectOfType<Player>());
         _blockMgr = FindObjectOfType<BlockMgr>();
         _fsm = StateMachine<PlayState>.Initialize(this, PlayState.Ready);
 
@@ -125,6 +126,11 @@ public class LevelMgr :MonoBehaviour
         if(_fsm.State == PlayState.Ready)
         {
             _fsm.ChangeState(PlayState.Playing);
+        }
+        else if(_fsm.State == PlayState.Playing)
+        {
+            Debug.Log("jump");
+            _player.Jump();
         }
     }
 
