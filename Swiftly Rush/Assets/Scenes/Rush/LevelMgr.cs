@@ -11,7 +11,7 @@ enum PlayState
 {
     Ready,
     Playing,
-    Dying
+    Lose
 };
 public class LevelMgr :MonoBehaviour
 {
@@ -22,13 +22,16 @@ public class LevelMgr :MonoBehaviour
 
     public static LevelMgr Current;
 
-    Player _player; 
+    Player _player;
+    BlockMgr _blockMgr;
 
     StateMachine<PlayState> _fsm;
     UIMgr uiMgr;
     public void Init()
     {
         uiMgr = FindObjectOfType<UIMgr>();
+        _player = FindObjectOfType<Player>();
+        _blockMgr = FindObjectOfType<BlockMgr>();
         _fsm = StateMachine<PlayState>.Initialize(this, PlayState.Ready);
 
     }
@@ -57,7 +60,27 @@ public class LevelMgr :MonoBehaviour
     {
         Debug.Log("Ready");
         uiMgr.SetStateText("Get Ready!");
+        Reset();
         //_fsm.ChangeState(PlayState.Playing);
+    }
+
+    private void Reset()
+    {
+        _blockMgr.Reset();
+        _player.transform.position = new Vector3(0, 1, 0);
+        _way = 0;
+    }
+
+    internal void ToLose()
+    {
+        _fsm.ChangeState(PlayState.Lose);
+    }
+
+    IEnumerator Lose_Enter()
+    {
+        uiMgr.SetStateText("Lose");
+        yield return new WaitForSeconds(2f);
+        _fsm.ChangeState(PlayState.Ready);
     }
 
     void Playing_Enter()

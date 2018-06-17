@@ -7,9 +7,24 @@ public class BlockMgr : MonoBehaviour {
     // Use this for initialization
     private void Start()
     {
-        GenBlock();
+        
        
     }
+    public void Reset()
+    {
+        foreach(var gb in _blockSet)
+        {
+            if(gb !=null)
+            {
+                Destroy(gb);
+            }
+        }
+        _blockSet.Clear();
+        blockIndex = 0;
+        GenBlock();
+    }
+
+    HashSet<GameObject> _blockSet = new HashSet<GameObject>();
 
     int blockIndex = 0;
     public void GenBlock()
@@ -19,6 +34,7 @@ public class BlockMgr : MonoBehaviour {
         Block block = gb.AddComponent<Block>();
         block.RegesterBlockMgr(this);
         block.transform.position = new Vector3(0, 0, 10 * blockIndex);
+        _blockSet.Add(gb);
         blockIndex ++;
     }
 	
